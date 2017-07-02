@@ -277,7 +277,9 @@
 		  {
 		    //如果当前数组的第i已经保存进了临时数组，那么跳过，
 		    //否则把当前项push到临时数组里面
-		    if (n.indexOf(this[i]) == -1) n.push(this[i]);
+		    if (n.indexOf(this[i]) == -1) {
+				n.push(this[i];
+			}
 		  }
 		  return n;
 		}
@@ -303,7 +305,9 @@
 		    {
 		        //如果当前数组的第i项在当前数组中第一次出现的位置不是i，
 		        //那么表示第i项是重复的，忽略掉。否则存入结果数组
-		        if (this.indexOf(this[i]) == i) n.push(this[i]);
+		        if (this.indexOf(this[i]) == i) {
+					n.push(this[i];
+				}
 		    }
 		    return n;
 		}
@@ -383,3 +387,22 @@
 	> - 获取异步调用返回的数据.
 	> - 使用JavaScript和DOM实现局部刷新. 
 
+24. 写一个获取非行间样式的函数
+
+		function getStyle(ele,attr,value) {
+			if(!value) {
+				if(ele.currentStyle) {
+					return ele.currentStyle(attr)
+				} else {
+					ele.getComputedStyle(attr,false)
+				}
+			} else {
+				ele.style[attr]=value
+			}
+		}
+
+25. javascript的同源策略
+
+	> 一段脚本只能读取来自于同一来源的窗口和文档的属性，这里的同一来源指的是主机名、协议和端口号的组合
+
+26. 
