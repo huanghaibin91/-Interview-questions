@@ -213,6 +213,24 @@
 	> 	- visibility:hidden 使生成的内容不可见，并允许可能被生成内容盖住的内容可以进行点击和交互;
 	> 	- 通过 content:"."生成内容作为最后一个元素，至于content里面是点还是其他都是可以的，例如oocss里面就有经典的 content:".",有些版本可能content 里面内容为空,一丝冰凉是不推荐这样做的,firefox直到7.0 content:”" 仍然会产生额外的空隙；
 	> 	- zoom：1 触发IE hasLayout。当设置了zoom的值之后，所设置的元素就会就会扩大或者缩小，高度宽度就会重新计算了，这里一旦改变zoom值时其实也会发生重新渲染。
+	> 	
+	> 常用清除浮动方法总结：
+	> 	
+	>（1）父级div定义height。
+	> 	
+	>（2）结尾处加空div标签clear:both。
+	>	
+	>（3）父级div定义伪类:after和zoom。
+	>	
+	>（4）父级div定义overflow:hidden。
+	>	
+	>（5）父级div定义overflow:auto。
+	>	
+	>（6）父级div也浮动，需要定义宽度。
+	>	
+	>（7）父级div定义display:table。
+	>	
+	>（8）结尾处加br标签clear:both
 
 16. 什么是外边距合并？
 
