@@ -59,7 +59,7 @@
 	
 	> CSS 框模型 (Box Model) 规定了元素框处理元素内容、内边距、边框和外边距的方式
 	> 1. 有两种， IE 盒子模型(IE8以下)、W3C 盒子模型；
-	> 2. 盒模型： 内容(content)、填充(padding)、边界(margin)、 边框(border)；
+	> 2. 盒模型： 内容(content)、填充(padding)、边界(margin)、边框(border)；
 	> 3. 区  别： IE的content部分把 border 和 padding计算了进去;
 
 10. CSS中哪些属性可以继承？哪些不可以？
@@ -86,7 +86,8 @@
 			 	width: 300px;
 			 	height: 300px;
 				background-color: pink;	/* 方便看效果 */
-			 	margin: auto;
+ 				/* 不知道尺寸也可以用margin：auto;然后设置left、right等都为0，这样设置是因为left和right都是0，不足的部分会让margin补足，看起来也是居中 */
+			 	margin: auto; 
 				position: absolute;
 			 	top: 0;
 			 	left: 0;
@@ -200,7 +201,7 @@
 	>
 	> - SASS编译的时候，浮动元素的父级div定义伪类:after
 	>
-		   	&:after,&:before{
+		   	&:after, &:before{
 		   	    content: " ";
 		        visibility: hidden;
 		        display: block;
@@ -212,7 +213,7 @@
 	> 	- display:block 使生成的元素以块级元素显示,占满剩余空间;
 	> 	- height:0 避免生成内容破坏原有布局的高度。
 	> 	- visibility:hidden 使生成的内容不可见，并允许可能被生成内容盖住的内容可以进行点击和交互;
-	> 	- 通过 content:"."生成内容作为最后一个元素，至于content里面是点还是其他都是可以的，例如oocss里面就有经典的 content:".",有些版本可能content 里面内容为空,是不推荐这样做的,firefox直到7.0 content:”" 仍然会产生额外的空隙；
+	> 	- 通过 content:"."生成内容作为最后一个元素，至于content里面是点还是其他都是可以的，例如oocss里面就有经典的 content:".",有些版本可能content 里面内容为空,是不推荐这样做的,firefox直到7.0 content:"" 仍然会产生额外的空隙；
 	> 	- zoom：1 触发IE hasLayout。当设置了zoom的值之后，所设置的元素就会就会扩大或者缩小，高度宽度就会重新计算了，这里一旦改变zoom值时其实也会发生重新渲染。
 	> 	
 	> 常用清除浮动方法总结：
@@ -249,10 +250,14 @@
 	> 
 	> 如果这个外边距遇到另一个元素的外边距，它还会发生合并
 	> ![]('./image/margin4.gif')
+	> 
+	> - 合并规则：全部都为正值，取最大者；不全是正值，则都取绝对值，然后用正值减去最大值；没有正值，则都取绝对值，然后用0减去最大值
 
 17. 父元素与子元素之间的margin-top问题
 
 	> 父元素的盒子包含一个子元素盒子，给子元素盒子一个垂直外边距margin-top,父元素盒子也会往下走margin-top的值，而子元素和父元素的边距则没有发生变化。
+	>
+	> 原因：一个盒子如果没有上补白(padding-top)和上边框(border-top)，那么这个盒子的上边距会和其内部文档流中的第一个子元素的上边距重叠
 	>     
 	> ![]('./image/margin5.jpg')
 	>  	    
@@ -299,3 +304,10 @@
 	> - 优雅降级：Web站点在所有新式浏览器中都能正常工作，如果用户使用的是老式浏览器，则代码会检查以确认它们是否能正常工作。由于IE独特的盒模型布局问题，针对不同版本的IE的hack实践过优雅降级了,为那些无法支持功能的浏览器增加候选方案，使之在旧式浏览器上以某种形式降级体验却不至于完全失效.
 	> 
 	> - 渐进增强：从被所有浏览器支持的基本功能开始，逐步地添加那些只有新式浏览器才支持的功能,向页面增加无害于基础浏览器的额外样式和功能的。当浏览器支持时，它们会自动地呈现出来并发挥作用。
+
+25. margin和padding百分比的时候是相对于谁来计算的？
+
+	> margin和padding百分比的时候相对于父元素的宽度计算的
+	> 
+	> - 相对于父元素宽度计算的有：width、left、right、margin、padding
+	> - 相对于父元素高度计算的有：height、top、bottom
